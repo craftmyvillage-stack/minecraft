@@ -1,18 +1,10 @@
-import time
-import logging
-import sys
 import os
+import sys
 
-# Ensure project root is in sys.path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 if BASE_DIR not in sys.path:
-    sys.path.append(BASE_DIR)
+    sys.path.insert(0, BASE_DIR)
 
-from the.market_data_and_signal import MarketSignalEngine
-from the.trade_execution_and_mode import ExecutionEngine
-from the.trade_management_and_risk import TradeManagementEngine
-from the.event_logger import EventLogger
-from the.state_manager import state_engine
 from fastapi import FastAPI
 import threading
 from bot_runner import main_loop
@@ -30,6 +22,7 @@ def start_bot():
 @app.get("/")
 def root():
     return {"status": "Trading bot running 🚀"}
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("BotOrchestrator")
