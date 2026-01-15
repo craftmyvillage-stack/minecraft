@@ -1,0 +1,119 @@
+You are acting as a SYSTEM AUDITOR, not a coder.
+
+IMPORTANT RULES:
+- Do NOT modify any code
+- Do NOT refactor or optimize
+- Do NOT add new features
+- ONLY analyze, verify, test, and report
+- Use logs, runtime behavior, state flow, and file structure
+- If something is broken or missing, ONLY REPORT IT
+
+GOAL:
+Perform a FULL SYSTEM HEALTH AUDIT of this trading bot and generate a detailed diagnostic report.
+
+After analysis:
+- Create a plain text file named: SYSTEM_AUDIT_REPORT.txt
+- Save the report in the root directory
+- The report must be human-readable and structured
+- I will download and share this report externally
+
+--------------------------------
+AUDIT CHECKLIST (CHECK EACH POINT)
+--------------------------------
+
+1. SYSTEM LIVENESS / HEARTBEAT
+- Is the main bot loop running?
+- Which file starts the bot process?
+- Is there a recurring cycle / tick?
+- Frequency of execution?
+- Is backend ACTIVE or IDLE?
+- Is the system actually alive or only UI loaded?
+
+2. BACKEND ↔ UI CONNECTION
+- Is UI connected to backend?
+- WebSocket / polling / API?
+- Is UI reading live state or stale state?
+- State update frequency
+- Any sync mismatch?
+
+3. MARKET SESSION LOGIC
+- Is Indian market session detected correctly?
+- NSE timing logic present or missing?
+- Timezone handling (IST vs UTC)?
+- Why market status shows WAITING while market is open?
+
+4. MARKET DATA SOURCE
+- From where is market data fetched?
+- TradingView / mock / placeholder?
+- Exact file handling market data
+- Is live data actually received?
+- If not, WHY?
+
+5. DATA VISIBILITY & TRACEABILITY
+- Can we see raw market data values?
+- Any logs printing price, candle, volume?
+- Is data silently consumed?
+- Missing debug visibility?
+
+6. STRATEGY EXECUTION
+- Is strategy logic being called?
+- Which file controls decision logic?
+- Entry conditions evaluated or skipped?
+- Why confidence is stuck at 0%?
+
+7. TRADE FLOW (PAPER MODE)
+- Is paper trading mode enforced?
+- Trade lifecycle: signal → entry → management → exit
+- Is any trade object ever created?
+- Why no active positions?
+
+8. RISK MANAGEMENT
+- Stop loss logic present?
+- Trailing stop logic present?
+- Take profit logic present?
+- Are these actually invoked or dead code?
+
+9. STATE MANAGEMENT
+- Global state handling file
+- State transitions: IDLE → ANALYZING → TRADE
+- Any state lock or dead state?
+- Improper resets?
+
+10. LOGGING & DIAGNOSTICS
+- Logging level
+- Important events logged or missing?
+- Silent failures?
+- Errors swallowed without output?
+
+11. UI FUNCTIONALITY
+- Why sidebar buttons not responding?
+- JS event listeners attached or broken?
+- Routing issue?
+- UI static vs dynamic?
+
+12. CONFIG & ENVIRONMENT
+- Missing environment variables?
+- Hardcoded placeholders?
+- GitHub → Replit path mismatch issues?
+- Broken imports due to folder changes?
+
+--------------------------------
+REPORT FORMAT (STRICT)
+--------------------------------
+
+SYSTEM_AUDIT_REPORT.txt must contain:
+
+- Executive Summary (Plain English)
+- System Status: ALIVE / PARTIAL / DEAD
+- Critical Failures (Must Fix)
+- Medium Issues
+- Minor Issues
+- Root Cause Analysis
+- File-wise Problem Mapping
+- Clear explanation WHY bot is not trading
+- Final Verdict: Is system logically correct or structurally broken?
+
+DO NOT FIX ANYTHING.
+ONLY ANALYZE, VERIFY, AND REPORT.
+
+START AUDIT NOW.
