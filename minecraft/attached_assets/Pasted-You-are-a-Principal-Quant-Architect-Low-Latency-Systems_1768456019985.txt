@@ -1,0 +1,158 @@
+You are a Principal Quant Architect + Low-Latency Systems Engineer.
+You understand Indian markets (NSE/BSE), real-time systems, and event-driven trading engines.
+
+🎯 OBJECTIVE
+
+Design a SMART MARKET DISCOVERY SYSTEM so the bot:
+
+❌ Spike miss na kare
+
+❌ System slow na ho
+
+❌ 20–30 instruments continuously track na kare
+
+✅ Automatically identify FAST-MOVING MARKETS
+
+✅ Only deep-analyze when required
+
+🧩 PROBLEM STATEMENT (READ CAREFULLY)
+
+The current bot only tracks NIFTY & BANKNIFTY, which can cause:
+
+Sectoral spike miss
+
+Stock-specific momentum miss
+
+Late entries
+
+BUT tracking many instruments together causes:
+
+CPU overload
+
+Data latency
+
+Slow signal reaction
+
+🧠 REQUIRED SOLUTION (MANDATORY)
+
+Implement a MULTI-STAGE INTELLIGENCE PIPELINE:
+
+🟢 STAGE-0: MARKET RADAR (LIGHTWEIGHT SCANNER)
+
+Purpose:
+Identify where money is moving fast without deep computation.
+
+Rules:
+
+No indicators
+
+No candle history
+
+No strategy logic
+
+Allowed metrics ONLY:
+
+Price velocity (% move in last X seconds)
+
+Range expansion
+
+Volume burst ratio
+
+Tick acceleration
+
+Spread contraction
+
+Universe:
+
+NSE Indices
+
+NSE Sector Indices
+
+Top 50 liquid stocks (configurable)
+
+Output:
+
+SYMBOL | ENERGY_SCORE (0–100) | REASON
+
+
+Threshold:
+
+ENERGY_SCORE ≥ 65 → HOT
+
+
+Scan interval:
+
+3–5 seconds (adaptive)
+
+🟡 STAGE-1: FOCUS ENGINE (LOAD REDUCTION CORE)
+
+Purpose:
+Reduce system load by 80–90%
+
+Rules:
+
+Maintain TOP 2–4 HOT instruments only
+
+All others go to SLEEP MODE
+
+Auto-drop symbols if energy decays
+
+Prevent duplicate symbol scanning
+
+Output:
+
+FOCUS_LIST = [symbol1, symbol2, symbol3]
+
+🔴 STAGE-2: DEEP STRATEGY ENGINE
+
+Only runs on FOCUS_LIST.
+
+Allowed:
+
+Candles
+
+Strategy logic
+
+Confidence scoring
+
+SL / Trailing SL / Profit lock
+
+Risk management
+
+Trade pipeline:
+
+ENERGY → CONFIRMATION → RISK → PAPER EXECUTION
+
+🧠 EXECUTION MODEL (CRITICAL)
+
+System must be:
+
+EVENT-DRIVEN
+
+NOT fixed-loop heavy polling
+
+Triggers:
+
+Energy spike event
+
+Volume burst event
+
+Volatility expansion event
+
+📊 DATA TRANSPARENCY (VERY IMPORTANT)
+
+Every tick must log:
+
+Source | Symbol | OHLC | Velocity | VolumeDelta | EnergyScore | Timestamp | Latency
+
+Also:
+Maintain CSV / Sheet-ready file
+Human-readable audit logs
+📄 OUTPUT REQUIRED
+Architecture explanation
+Data flow diagram (text)
+Why this prevents spike misses
+Why CPU load stays low
+Limitations & safeguards
+Save to:
+SMART_MARKET_DISCOVERY_ARCH.txt
