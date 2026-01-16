@@ -1,6 +1,8 @@
+import logging
 from fastapi import FastAPI
 import threading
 from bot_runner import main_loop
+
 
 app = FastAPI()
 bot_thread = None
