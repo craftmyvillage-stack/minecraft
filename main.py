@@ -17,9 +17,6 @@ def root():
     return {"status": "Trading bot running 🚀"}
 
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("BotOrchestrator")
-
 def main_loop():
     logger.info("[SYSTEM READY] Paper trading live with TradingView data")
     
