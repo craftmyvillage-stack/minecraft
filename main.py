@@ -1,8 +1,7 @@
-import logging
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 import threading
 from bot_runner import main_loop
-
 
 app = FastAPI()
 bot_thread = None
@@ -14,36 +13,39 @@ def start_bot():
         bot_thread = threading.Thread(target=main_loop, daemon=True)
         bot_thread.start()
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 def root():
-    return {"status": "Trading bot running 🚀"}
-
-
-def main_loop():
-    logger.info("[SYSTEM READY] Paper trading live with TradingView data")
-    
-    event_logger = EventLogger()
-    signal_engine = MarketSignalEngine()
-    execution_engine = ExecutionEngine()
-    risk_engine = TradeManagementEngine(event_logger)
-
-    while True:
-        try:
-            # 1. Market Data & Signal Generation
-            signals = signal_engine.scan_market()
-            
-            # 2. Trade Execution
-            for sig in signals:
-                event_logger.log_signal(sig)
-                execution_engine.execute_trade(sig)
-
-            # 3. Trade Management & Risk
-            risk_engine.check_exits()
-            
-            time.sleep(2) # 2-second interval as per requirement
-        except Exception as e:
-            logger.error(f"Loop Error: {e}")
-            time.sleep(5)
-
-if __name__ == "__main__":
-    main_loop()
+    return """
+    <html>
+      <head>
+        <title>Trading Bot</title>
+        <style>
+          body {
+            background:#0f172a;
+            color:#e5e7eb;
+            font-family: Arial, sans-serif;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+          }
+          .card {
+            background:#020617;
+            padding:30px 40px;
+            border-radius:12px;
+            box-shadow:0 0 20px rgba(0,0,0,0.5);
+            text-align:center;
+          }
+          h1 { color:#22c55e; }
+          p { margin-top:10px; color:#94a3b8; }
+        </style>
+      </head>
+      <body>
+        <div class="card">
+          <h1>🚀 Trading Bot Running</h1>
+          <p>Your bot is live and scanning the market.</p>
+          <p>Status: <b>ACTIVE</b></p>
+        </div>
+      </body>
+    </html>
+    """
